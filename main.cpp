@@ -37,9 +37,52 @@ void deleteElement(ELEMENT_TYPE list[], int pos, int &last) {
         cout << "The list is empty" << endl;
     }
     else {
-        for (int i = pos; i < last; i++) {
+        for (int i = pos; i <= last; i++) {
             list[i] = list[i + 1];
         }
         --last;
     }
+}
+
+void locateItem(ELEMENT_TYPE list[], ELEMENT_TYPE searchData, int last) {
+
+    if (isEmpty(last)) {
+        cout << "The list is empty" << endl;
+    }
+    else {
+        int index = 0;
+        //READABILITY IS IMPORTANT SO STICK WITH CURLY BRACES
+        while (index != last + 1 && list[index] != searchData) {
+            ++index;
+        }
+        if (index != last + 1) {
+            cout << "Item Requested is item " << index + 1 << endl;
+        }
+        else {
+            cout << "Item does not exist" << endl;
+        }
+
+    }
+}
+
+void printList(ELEMENT_TYPE list[], int last) {
+
+    if (isEmpty(last)) {
+        cout << "NIL" << endl;
+    }
+    else {
+        for (int i = 0; i <= last; i++) {
+            cout << list[i] << endl;
+        }
+    }
+}
+
+int main() {
+    ELEMENT_TYPE list[MAX_SIZE];
+    int last = -1;
+    addElement(list, 13, 0, last);
+    addElement(list, 2, 1, last);
+    printList(list, last);
+    locateItem(list, 13, last);
+
 }
