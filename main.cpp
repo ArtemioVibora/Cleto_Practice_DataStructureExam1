@@ -2,7 +2,7 @@
 
 using namespace std;
 
-const int MAX_SIZE = 3;
+const int MAX_SIZE = 10;
 typedef int ELEMENT_TYPE;
 
 bool isFull(int last) {
@@ -19,7 +19,7 @@ bool isEmpty(int last) {
     return false;
 }
 
-void addElement(ELEMENT_TYPE list[], int data, int pos, int &last) {
+void addElement(ELEMENT_TYPE list[], ELEMENT_TYPE data, int pos, int &last) {
     if (isFull(last)) {
         cout << "The list is full" << endl;
     }
@@ -83,12 +83,90 @@ void printList(ELEMENT_TYPE list[], int last) {
     }
 }
 
-int main() {
+int promptData() {
+    int data;
+    cout << "Enter data: ";
+
+    while (!(cin >> data)) {
+        cin.clear();
+        cin.ignore(80, '\n');
+        cout << "Enter data: ";
+    }
+
+    return data;
+}
+
+int promptPosition() {
+    int pos;
+    cout << "Enter position: ";
+    while (!(cin >> pos) || data > MAX_SIZE || pos < 0) {
+        cin.clear();
+        cin.ignore(80, '\n');
+        cout << "Enter position: ";
+    }
+    return pos;
+}
+
+void optionsDisplay(int last) {
+    cout << endl;
+    cout << "--------------------------------" << endl;
+    cout << "<1> Add" << endl;
+    cout << "<2> Delete" << endl;
+    cout << "<3> Locate" << endl;
+    cout << "<4> Print All" << endl;
+    cout << "<5> Exit" << endl;
+    cout << "--------------------------------" << endl;
+    cout << "There are " << last + 1 << " in the list." << endl;
+
+}
+
+void runProgram() {
     ELEMENT_TYPE list[MAX_SIZE];
     int last = -1;
-    addElement(list, 13, 0, last);
-    addElement(list, 2, 1, last);
-    printList(list, last);
-    locateItem(list, 13, last);
+    int pos, data, searchData;
+    int input = 0;
+    while (input != 5) {
+        optionsDisplay(last);
+        cout << ">>>>";
+        while (!(cin >> input)) {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "Error!" << endl;
+            optionsDisplay(last);
+            cout << ">>>>";
+        }
+        switch (input) {
+            case 1:
+                cout << "You picked Add" << endl;
+                data = promptData();
+                pos = promptPosition();
+                addElement(list, data, pos, last);
+                break;
+            case 2:
+                cout << "You picked Delete" << endl;
+                pos = promptData();
+                deleteElement(list, pos, last);
+                break;
+            case 3:
+                cout << "You picked Locate" << endl;
+                searchData = promptData();
+                locateItem(list, searchData, last);
+                break;
+            case 4:
+                cout << "You picked PrintAll" << endl;
+                printList(list, last);
+                break;
+            default:
+                break;
+        }
+
+
+    }
+
+}
+
+
+int main() {
+    runProgram();
 
 }
