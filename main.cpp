@@ -24,6 +24,8 @@ void addElement(ELEMENT_TYPE list[], int data, int pos, int &last) {
         cout << "The list is full" << endl;
     }
     else {
+
+
         for (int i = last; i >= pos; i--) {
             list[i + 1] = list[i];
         }
