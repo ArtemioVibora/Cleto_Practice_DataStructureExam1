@@ -24,9 +24,13 @@ void addElement(ELEMENT_TYPE list[], int data, int pos, int &last) {
         cout << "The list is full" << endl;
     }
     else {
-
+        //If last == -1 and pos = 0
+        //For loop would not work
+        //if last == 0 and pos == 0
+        //For loop would work with only 1 iteration
 
         for (int i = last; i >= pos; i--) {
+            //list[i + 1] == 1 if i = 0
             list[i + 1] = list[i];
         }
         list[pos] = data;
