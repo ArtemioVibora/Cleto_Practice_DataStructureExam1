@@ -23,6 +23,10 @@ void addElement(ELEMENT_TYPE list[], ELEMENT_TYPE data, int pos, int &last) {
     if (isFull(last)) {
         cout << "The list is full" << endl;
     }
+    else if (pos > last + 1) {
+        cout << "Cannot add element due to position exceeding last" << endl;
+        cout << "Last is " << last + 1 << endl;
+    }
     else {
         //If last == -1 and pos = 0
         //For loop would not work
@@ -41,6 +45,9 @@ void addElement(ELEMENT_TYPE list[], ELEMENT_TYPE data, int pos, int &last) {
 void deleteElement(ELEMENT_TYPE list[], int pos, int &last) {
     if (isEmpty(last)) {
         cout << "The list is empty" << endl;
+    }
+    else if (pos > last) {
+        cout << "Cannot delete data of which the index does not exist" << endl;
     }
     else {
         for (int i = pos; i <= last; i++) {
@@ -86,7 +93,6 @@ void printList(ELEMENT_TYPE list[], int last) {
 int promptData() {
     int data;
     cout << "Enter data: ";
-
     while (!(cin >> data)) {
         cin.clear();
         cin.ignore(80, '\n');
@@ -99,7 +105,7 @@ int promptData() {
 int promptPosition() {
     int pos;
     cout << "Enter position: ";
-    while (!(cin >> pos) || data > MAX_SIZE || pos < 0) {
+    while (!(cin >> pos) || pos > MAX_SIZE || pos < 0) {
         cin.clear();
         cin.ignore(80, '\n');
         cout << "Enter position: ";
