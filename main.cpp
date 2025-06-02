@@ -31,7 +31,7 @@ void addElement(ELEMENT_TYPE list[], ELEMENT_TYPE data, int pos, int &last) {
         //If last == -1 and pos = 0
         //For loop would not work
         //if last == 0 and pos == 0
-        //For loop would work with only 1 iteration
+        //For loop would work with only 1 incrementation
 
         for (int i = last; i >= pos; i--) {
             //list[i + 1] == 1 if i = 0
@@ -115,6 +115,7 @@ int promptPosition() {
 
 void optionsDisplay(int last) {
     cout << endl;
+    cout << "The Array listing stuff" << endl;
     cout << "--------------------------------" << endl;
     cout << "<1> Add" << endl;
     cout << "<2> Delete" << endl;
@@ -133,13 +134,13 @@ void runProgram() {
     int input = 0;
     while (input != 5) {
         optionsDisplay(last);
-        cout << ">>>>";
+        cout << ">>>> ";
         while (!(cin >> input)) {
             cin.clear();
             cin.ignore(10000, '\n');
             cout << "Error!" << endl;
             optionsDisplay(last);
-            cout << ">>>>";
+            cout << ">>>> ";
         }
         switch (input) {
             case 1:
@@ -150,7 +151,7 @@ void runProgram() {
                 break;
             case 2:
                 cout << "You picked Delete" << endl;
-                pos = promptData();
+                pos = promptPosition();
                 deleteElement(list, pos, last);
                 break;
             case 3:
